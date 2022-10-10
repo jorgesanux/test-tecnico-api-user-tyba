@@ -35,6 +35,14 @@ export default class AuthController {
     async register(req, res, next) {
         const payload = req.body;
         try{
+            const lastUser = await User.findOne({
+                where: {
+                    email: payload.email
+                }
+            })
+
+            if(lastUser !== null) throw new APIError(401, `User already exists`);
+
             const user = await User.create(payload);
             const data = user.toJSON();
             delete data.password;
