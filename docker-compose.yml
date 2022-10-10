@@ -1,0 +1,34 @@
+version: '3.8'
+services:
+  app:
+    container_name: apiserver
+    build: .
+    image: jorgesanux/api-user
+    depends_on:
+      - postgres
+    ports:
+      - "8080:3000"
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    environment:
+      - PG_HOST=postgres
+      - PG_PORT=5432
+      - PG_DATABASE=apiuser
+      - PG_USER=root
+      - PG_PASSWORD=root
+      - PG_SSL=false
+      - JWT_SECRET=JwTSeCrEt
+      - API_PLACES_SECRET=put_here_the_secret_api
+  postgres:
+    container_name: apidb
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=apiuser
+    ports:
+      - ":5432"
+    volumes:
+      - ./src/db/db.sql:/docker-entrypoint-initdb.d/database-seed.sql
