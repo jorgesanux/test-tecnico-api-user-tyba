@@ -1,0 +1,372 @@
+{
+	"info": {
+		"_postman_id": "77eef144-f109-42e7-ab0f-26bd9d7e0f63",
+		"name": "Api Users",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13292946"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user\":\"jorgesanux1@gmail.com\",\r\n    \"password\":\"1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/auth/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\":\"jorgesanux1@gmail.com\",\r\n    \"password\":\"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "509"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1fd-aNXL8mE6YoTf4iyKaf3GIzPtIdU\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 10 Oct 2022 04:33:58 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 200,\n    \"message\": \"Authentication successfully\",\n    \"results\": [],\n    \"result\": {\n        \"id\": \"51f03e38-6bd5-438b-956e-7ccba4029073\",\n        \"first_name\": \"Jorge\",\n        \"last_name\": \"Sanabria\",\n        \"email\": \"jorgesanux1@gmail.com\",\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiNTFmMDNlMzgtNmJkNS00MzhiLTk1NmUtN2NjYmE0MDI5MDczIiwiZmlyc3RfbmFtZSI6IkpvcmdlIiwibGFzdF9uYW1lIjoiU2FuYWJyaWEiLCJlbWFpbCI6Impvcmdlc2FudXgxQGdtYWlsLmNvbSJ9LCJleHAiOjE2NjUzNzY0OTgsImlhdCI6MTY2NTM3NjQzOH0.FAFZ8YYGqpvTd0SGjPPrf30dgODZnh1yvJmDrU3KsSk\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Restaurants",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiYWUyZWFkM2MtMzllMy00YmM2LWFmMWYtMjhlYzRmNDJiYzkwIiwiZmlyc3RfbmFtZSI6IkpvcmdlIiwibGFzdF9uYW1lIjoiU2FuYWJyaWEiLCJlbWFpbCI6Impvcmdlc2FudXgxQGdtYWlsLmNvbSJ9LCJleHAiOjE2NjUzNzYzNzksImlhdCI6MTY2NTM3NjMxOX0.fRxhsyQA_EFWZdTPw5nLHePiSO915KbaB9F5vUhmmtE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"lat\": \"10.428030996317084\",\r\n    \"long\": \"-75.53631538581674\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/city/restaurants",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"city",
+						"restaurants"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Restaurants",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiYWUyZWFkM2MtMzllMy00YmM2LWFmMWYtMjhlYzRmNDJiYzkwIiwiZmlyc3RfbmFtZSI6IkpvcmdlIiwibGFzdF9uYW1lIjoiU2FuYWJyaWEiLCJlbWFpbCI6Impvcmdlc2FudXgxQGdtYWlsLmNvbSJ9LCJleHAiOjE2NjUzNzYzNzksImlhdCI6MTY2NTM3NjMxOX0.fRxhsyQA_EFWZdTPw5nLHePiSO915KbaB9F5vUhmmtE",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"lat\": \"10.428030996317084\",\r\n    \"long\": \"-75.53631538581674\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/city/restaurants",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"city",
+								"restaurants"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1779"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"6f3-npFhHLh9FGY1JJpGqLFB66cqIgU\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 10 Oct 2022 04:24:58 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 200,\n    \"message\": \"Obtained restaurants\",\n    \"results\": [],\n    \"result\": [\n        {\n            \"name\": \"Restaurante San Pedro\",\n            \"categories\": \"Bar, Latin American Restaurant\",\n            \"country\": \"CO\",\n            \"department\": \"Bolívar\",\n            \"city\": \"Cartagena\",\n            \"location\": {\n                \"lat\": 10.421789,\n                \"long\": -75.550537\n            }\n        },\n        {\n            \"name\": \"Restaurante Santuario\",\n            \"categories\": \"Restaurant\",\n            \"country\": \"CO\",\n            \"location\": {\n                \"lat\": 10.428582,\n                \"long\": -75.545114\n            }\n        },\n        {\n            \"name\": \"Restaurante Sambal, Bistro Caribeño\",\n            \"categories\": \"Caribbean Restaurant\",\n            \"country\": \"CO\",\n            \"department\": \"Bolívar\",\n            \"city\": \"Cartagena\",\n            \"location\": {\n                \"lat\": 10.422222,\n                \"long\": -75.544746\n            }\n        },\n        {\n            \"name\": \"Restaurante Santo Toribio\",\n            \"categories\": \"Restaurant\",\n            \"country\": \"CO\",\n            \"department\": \"Bolívar\",\n            \"city\": \"Cartagena\",\n            \"location\": {\n                \"lat\": 10.427347,\n                \"long\": -75.548503\n            }\n        },\n        {\n            \"name\": \"Restaurante Sason Santo Domingo\",\n            \"categories\": \"Restaurant\",\n            \"country\": \"CO\",\n            \"department\": \"Bolívar\",\n            \"city\": \"Cartagena\",\n            \"location\": {\n                \"lat\": 10.424946,\n                \"long\": -75.550974\n            }\n        },\n        {\n            \"name\": \"Restaurante San Diego\",\n            \"categories\": \"Italian Restaurant\",\n            \"country\": \"CO\",\n            \"department\": \"Bolívar\",\n            \"city\": \"Cartagena\",\n            \"location\": {\n                \"lat\": 10.428256,\n                \"long\": -75.547497\n            }\n        },\n        {\n            \"name\": \"Restaurante Sabor Mulato\",\n            \"categories\": \"Caribbean Restaurant\",\n            \"country\": \"CO\",\n            \"department\": \"Bolívar\",\n            \"city\": \"Cartagena\",\n            \"location\": {\n                \"lat\": 10.420919,\n                \"long\": -75.547008\n            }\n        },\n        {\n            \"name\": \"Restaurante San Marino Hotel Capilla Del Mar\",\n            \"categories\": \"Caribbean Restaurant\",\n            \"country\": \"CO\",\n            \"location\": {\n                \"lat\": 10.404376,\n                \"long\": -75.555505\n            }\n        },\n        {\n            \"name\": \"Restaurante Santa Cruz\",\n            \"categories\": \"South American Restaurant\",\n            \"country\": \"CO\",\n            \"department\": \"Bolívar\",\n            \"city\": \"Cartagena\",\n            \"location\": {\n                \"lat\": 10.395789,\n                \"long\": -75.522217\n            }\n        },\n        {\n            \"name\": \"Restaurante Sung Waa\",\n            \"categories\": \"Asian Restaurant, Chinese Restaurant\",\n            \"country\": \"CO\",\n            \"department\": \"Bolívar\",\n            \"city\": \"Cartagena\",\n            \"location\": {\n                \"lat\": 10.400483,\n                \"long\": -75.556229\n            }\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"first_name\": \"Jorge\",\r\n    \"last_name\": \"Sanabria\",\r\n    \"email\": \"jorgesanux1@gmail.comm\",\r\n    \"password\": \"1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/auth/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Register",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"first_name\": \"Jorge\",\r\n    \"last_name\": \"Sanabria\",\r\n    \"email\": \"jorgesanux1@gmail.com\",\r\n    \"password\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/auth/register",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "183"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"b7-eD3RmxmujAYQRFfG6NkPZJe6HUk\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 10 Oct 2022 04:33:42 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 201,\n    \"message\": \"User created\",\n    \"results\": [],\n    \"result\": {\n        \"id\": \"51f03e38-6bd5-438b-956e-7ccba4029073\",\n        \"first_name\": \"Jorge\",\n        \"last_name\": \"Sanabria\",\n        \"email\": \"jorgesanux1@gmail.com\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "History",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/transaction/history",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"transaction",
+						"history"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "History",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/transaction/history",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"transaction",
+								"history"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1695"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"69f-gIgB/IHbd3Hw05gqJM/OG3t880A\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 10 Oct 2022 04:32:51 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 200,\n    \"message\": \"Obtained history\",\n    \"results\": [],\n    \"result\": [\n        {\n            \"id\": \"5476946a-a907-41f1-8f83-d92b90dea055\",\n            \"endpoint\": \"/transaction/history\",\n            \"method\": \"GET\",\n            \"hostname\": \"localhost\",\n            \"ip\": \"::ffff:192.168.32.1\",\n            \"created_at\": \"2022-10-10T04:24:19.668Z\"\n        },\n        {\n            \"id\": \"a71446a6-515e-4195-a561-9194f0a87bc1\",\n            \"endpoint\": \"/auth/register\",\n            \"method\": \"POST\",\n            \"hostname\": \"localhost\",\n            \"ip\": \"::ffff:192.168.32.1\",\n            \"created_at\": \"2022-10-10T04:24:46.549Z\"\n        },\n        {\n            \"id\": \"9fc72c07-9f2f-4b4e-a63a-bdbe2165eb12\",\n            \"endpoint\": \"/auth/login\",\n            \"method\": \"POST\",\n            \"hostname\": \"localhost\",\n            \"ip\": \"::ffff:192.168.32.1\",\n            \"created_at\": \"2022-10-10T04:24:50.633Z\"\n        },\n        {\n            \"id\": \"99e7283a-aa53-4171-bcb7-c640e9ca4863\",\n            \"endpoint\": \"/city/restaurants\",\n            \"method\": \"POST\",\n            \"hostname\": \"localhost\",\n            \"ip\": \"::ffff:192.168.32.1\",\n            \"created_at\": \"2022-10-10T04:24:57.307Z\"\n        },\n        {\n            \"id\": \"58ace911-06ff-487b-8ae7-46a9e35baab9\",\n            \"endpoint\": \"/city/restaurants\",\n            \"method\": \"POST\",\n            \"hostname\": \"localhost\",\n            \"ip\": \"::ffff:192.168.32.1\",\n            \"created_at\": \"2022-10-10T04:29:40.718Z\"\n        },\n        {\n            \"id\": \"a6552174-03a0-4853-805f-eb0d2104ece8\",\n            \"endpoint\": \"/auth/login\",\n            \"method\": \"POST\",\n            \"hostname\": \"localhost\",\n            \"ip\": \"::ffff:192.168.32.1\",\n            \"created_at\": \"2022-10-10T04:29:44.141Z\"\n        },\n        {\n            \"id\": \"de4ca2e8-0a45-49e5-ac8b-582b98cdf701\",\n            \"endpoint\": \"/city/restaurants\",\n            \"method\": \"POST\",\n            \"hostname\": \"localhost\",\n            \"ip\": \"::ffff:192.168.32.1\",\n            \"created_at\": \"2022-10-10T04:29:50.673Z\"\n        },\n        {\n            \"id\": \"53b4f0ac-dcd9-4ce1-8b88-99b2f365075b\",\n            \"endpoint\": \"/auth/login\",\n            \"method\": \"POST\",\n            \"hostname\": \"localhost\",\n            \"ip\": \"::ffff:192.168.32.1\",\n            \"created_at\": \"2022-10-10T04:31:58.755Z\"\n        },\n        {\n            \"id\": \"b7ffe731-9428-495c-a9e4-b71ca1d8a1f4\",\n            \"endpoint\": \"/city/restaurants\",\n            \"method\": \"POST\",\n            \"hostname\": \"localhost\",\n            \"ip\": \"::ffff:192.168.32.1\",\n            \"created_at\": \"2022-10-10T04:32:06.865Z\"\n        }\n    ]\n}"
+				}
+			]
+		}
+	]
+}
