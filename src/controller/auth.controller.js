@@ -41,7 +41,7 @@ export default class AuthController {
                 }
             })
 
-            if(lastUser !== null) throw new APIError(401, `User already exists`);
+            if(lastUser !== null) throw new APIError(409, `User already exists`);
 
             const user = await User.create(payload);
             const data = user.toJSON();
@@ -77,19 +77,15 @@ export default class AuthController {
             req.get("Authorization");
 
         try{
-            if(!token) throw new APIError(401, `Token not found`);
+            if(!token) throw new APIError(404, `Token not found`);
             if(token.includes("Bearer")){
                 token = token.substring(7);
             }
-            jwt.verify(token, process.env.JWT_SECRET);;
+            req.user = jwt.verify(token, process.env.JWT_SECRET)?.data;
             next();
         }catch(error){
             if(error instanceof jwt.JsonWebTokenError){
-                res.status(401);
-                res.json({
-                    code: 401,
-                    message: error.message
-                });
+                throw new APIError(401, error.message);
             }else{
                 throw error;
             }

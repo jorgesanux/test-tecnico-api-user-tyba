@@ -5,7 +5,7 @@ const historyController = new HistoryController();
 
 const router = express.Router();
 
-router.get("/history", (req, res, next)=>{
+router.get("/history", (req, res, next) => {
     historyController.getHistory(req, res, next);
 });
 
