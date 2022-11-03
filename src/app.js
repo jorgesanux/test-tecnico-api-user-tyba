@@ -7,6 +7,7 @@ import { fileURLToPath } from 'url';
 
 import APIError from "./util/apiError.js";
 import { history } from './middleware/history.middleware.js';
+import authenticator from "./middleware/authenticator.middleware.js";
 
 import indexRouter from "./routes/index.js";
 import authRouter from "./routes/auth.router.js"
@@ -22,12 +23,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(history);
+// app.use(history);
 
 app.use('/', indexRouter);
 app.use("/auth", authRouter);
-app.use("/city", cityRouter);
-app.use("/transaction", historyRouter);
+app.use("/city", authenticator, history, cityRouter);
+app.use("/transaction", authenticator, history, historyRouter);
 
 app.use((error, _req, res, next) => {
     if (error instanceof APIError) {

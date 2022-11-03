@@ -26,6 +26,14 @@ History.init({
         type: DataTypes.STRING(50),
         allowNull: false
     },
+    agent: {
+        type: DataTypes.TEXT,
+        allowNull: true
+    },
+    email: {
+        type: DataTypes.STRING(80),
+        allowNull: false
+    },
     created_at: {
         type: DataTypes.DATE,
         allowNull: false,
