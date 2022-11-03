@@ -32,6 +32,8 @@ export default class AuthController {
         }
     }
 
+    async logout(){}
+
     async register(req, res, next) {
         const payload = req.body;
         try{
