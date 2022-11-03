@@ -7,9 +7,11 @@ create table users(
     last_name varchar(50) not null,
     email varchar(80) not null,
     password text not null,
+    created_at timestamptz default now()::timestamptz,
     primary key(id),
     unique(email)
 );
+create index user_email on history(email);
 
 drop table if exists history;
 create table history(
@@ -17,6 +19,7 @@ create table history(
     endpoint text not null,
     hostname text not null,
     ip varchar(50) not null,
+    agent text,
     email varchar(80) not null,
     method varchar(20) not null,
     created_at timestamptz default now()::timestamptz
