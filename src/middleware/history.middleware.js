@@ -1,14 +1,11 @@
 import History from "../model/history.model.js";
+import HistoryController from "../controller/history.controller.js";
+
+const historyController = new HistoryController();
 
 async function history(req, res, next){
     try{
-        await History.create({
-            endpoint: req.originalUrl,
-            hostname: req.hostname,
-            ip: req.ip,
-            method: req.method,
-            email: req.user.email
-        });
+        historyController.saveHistory(req, res, next);
         next();
     }catch(error){
         next(error);
