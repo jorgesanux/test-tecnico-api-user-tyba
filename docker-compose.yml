@@ -8,9 +8,10 @@ services:
       - postgres
     ports:
       - "8080:3000"
-    volumes:
-      - ./:/app
-      - /app/node_modules
+    # Se comentan los volumes mientras se entiendes por que queda una referencia a los archivos locales
+    # volumes:
+      # - ./:/app
+      # - /app/node_modules
     environment:
       - PG_HOST=postgres
       - PG_PORT=5432
@@ -20,6 +21,7 @@ services:
       - PG_SSL=false
       - JWT_SECRET=JwTSeCrEt
       - API_PLACES_SECRET=put_here_the_secret_api
+      - PORT=3000
   postgres:
     container_name: apidb
     image: postgres:14.1-alpine

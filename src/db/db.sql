@@ -11,7 +11,7 @@ create table users(
     primary key(id),
     unique(email)
 );
-create index user_email on history(email);
+create index user_email on users(email);
 
 drop table if exists history;
 create table history(
