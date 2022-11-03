@@ -6,7 +6,11 @@ export default class HistoryController{
 
     async getHistory(req, res, next){
         try{
-            const history = await History.findAll();
+            const history = await History.findAll({
+                where: {
+                    email: req.user.email
+                }
+            });
 
             res.status(200);
             res.json(new APIResponse({
@@ -19,4 +23,13 @@ export default class HistoryController{
         }
     }
 
+    async saveHistory(req, res, next){
+        await History.create({
+            endpoint: req.originalUrl,
+            hostname: req.hostname,
+            ip: req.ip,
+            method: req.method,
+            email: req.user.email
+        });
+    }
 }
