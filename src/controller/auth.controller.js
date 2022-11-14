@@ -16,7 +16,7 @@ export default class AuthController {
 
             const token = jwt.sign({
                 data,
-                exp: Math.floor((Date.now() + 60000) / 1000) //Expires in 60 seconds
+                exp: Math.floor((Date.now() + process.env.TIME_LIVE_TOKEN) / 1000) //Expires in 60 seconds
             }, process.env.JWT_SECRET);
 
             data.token = token;

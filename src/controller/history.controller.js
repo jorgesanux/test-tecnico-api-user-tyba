@@ -38,7 +38,7 @@ export default class HistoryController{
             ip: req.ip,
             agent: req.headers["user-agent"],
             method: req.method,
-            email: req.user.email
+            email: req?.user?.email ? req.user.email : null
         });
     }
 }

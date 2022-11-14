@@ -32,7 +32,7 @@ History.init({
     },
     email: {
         type: DataTypes.STRING(80),
-        allowNull: false
+        allowNull: true
     },
     created_at: {
         type: DataTypes.DATE,

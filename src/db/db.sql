@@ -20,7 +20,7 @@ create table history(
     hostname text not null,
     ip varchar(50) not null,
     agent text,
-    email varchar(80) not null,
+    email varchar(80),
     method varchar(20) not null,
     created_at timestamptz default now()::timestamptz
 );
