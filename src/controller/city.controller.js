@@ -4,13 +4,20 @@ import { URLSearchParams, URL } from 'url';
 import Constant from "../util/constant.js";
 import APIError from "../util/apiError.js";
 import APIResponse from "../util/apiResponse.js";
+import redisClient from "../db/redis.js";
 
 export default class CityController{
     async getRestaurantsByCoords(req, res, next){
         try{
             const {lat, long} = req.body;
-            const response = await this.getNearbyPlacesByLL(lat, long, "restaurantes");
-            const result = this.transformResults(response);
+            let result = JSON.parse(await redisClient.get(`city:${lat},${long}`));
+            if(!result) {
+                const response = await this.getNearbyPlacesByLL(lat, long, "restaurantes");
+                result = this.transformResults(response);
+                await redisClient.set(`city:${lat},${long}`, JSON.stringify(result), {
+                    EX: 10 * 60
+                });
+            }
             res.status(200);
             res.json(new APIResponse({
                 statusCode: 200,

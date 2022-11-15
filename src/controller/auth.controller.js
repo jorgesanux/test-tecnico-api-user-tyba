@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import User from "../model/user.model.js";
 import APIError from "../util/apiError.js";
 import APIResponse from "../util/apiResponse.js";
+import redisClient from "../db/redis.js";
 
 export default class AuthController {
 
@@ -14,10 +15,24 @@ export default class AuthController {
             const data = userObj.toJSON();
             delete data.password;
 
-            const token = jwt.sign({
-                data,
-                exp: Math.floor((Date.now() + process.env.TIME_LIVE_TOKEN) / 1000) //Expires in 60 seconds
-            }, process.env.JWT_SECRET);
+            const nameKeyTokenRedis = `${data.email}:token`;
+            let tokenRedis = await redisClient.get(nameKeyTokenRedis);
+
+            let token = null;
+            if(tokenRedis){
+                token = tokenRedis;
+            } else {
+                let timestampToExpire = Math.floor((Date.now() + Number(process.env.TIME_LIVE_TOKEN)) / 1000);
+                
+                token = jwt.sign({
+                    data,
+                    exp: timestampToExpire
+                }, process.env.JWT_SECRET);
+
+                await redisClient.set(nameKeyTokenRedis, token, {
+                    EXAT: timestampToExpire
+                });
+            }
 
             data.token = token;
 

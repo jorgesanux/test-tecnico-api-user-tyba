@@ -1,33 +1,5 @@
 version: '3.8'
 services:
-  app:
-    # container_name: apiserver
-    build: .
-    image: jorgesanux/api-user
-    deploy:
-      replicas: 5
-      resources:
-        limits:
-          memory: 100M
-    depends_on:
-      - postgres
-    ports:
-      - ":3000"
-    # Se comentan los volumes mientras se entiendes por que queda una referencia a los archivos locales
-    # volumes:
-      # - ./:/app
-      # - /app/node_modules
-    environment:
-      - PG_HOST=postgres
-      - PG_PORT=5432
-      - PG_DATABASE=apiuser
-      - PG_USER=root
-      - PG_PASSWORD=root
-      - PG_SSL=false
-      - JWT_SECRET=JwTSeCrEt
-      - API_PLACES_SECRET=put_here_the_secret_api
-      - PORT=3000
-      - TIME_LIVE_TOKEN=3600000
   postgres:
     container_name: apidb
     image: postgres:14.1-alpine
@@ -41,19 +13,66 @@ services:
       - POSTGRES_PASSWORD=root
       - POSTGRES_DB=apiuser
     ports:
-      - "5433:5432"
+      - ":5432"
     volumes:
       - ./src/db/db.sql:/docker-entrypoint-initdb.d/database-seed.sql
-  loadbalancer:
+  redis:
+    container_name: apicache
+    image: redis:7.0.5-alpine
+    deploy:
+      resources:
+        limits:
+          memory: 10M
+    restart: always
+    ports:
+      - ":6379"
+    # command: redis-server --save 20 1 --loglevel warning --requirepass root
+    command: redis-server --save 20 1 --loglevel warning
+    volumes:
+      - cache:/data
+  app:
+    # container_name: apiserver
+    build: .
+    image: jorgesanux/api-user
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          memory: 100M
+    depends_on:
+      - postgres
+      - redis
+    ports:
+      - ":3000"
+      # Se comentan los volumes mientras se entiendes por que queda una referencia a los archivos locales
+      # volumes:
+      # - ./:/app
+      # - /app/node_modules
+    environment:
+      - PG_HOST=postgres
+      - PG_PORT=5432
+      - PG_DATABASE=apiuser
+      - PG_USER=root
+      - PG_PASSWORD=root
+      - PG_SSL=false
+      - JWT_SECRET=JwTSeCrEt
+      - API_PLACES_SECRET=put_here_the_secret_api
+      - PORT=3000
+      - TIME_LIVE_TOKEN=3600000
+      - REDIS_URL=redis://redis:6379
+  nginx:
     container_name: loadbalancer
     image: nginx:latest
     deploy:
       resources:
         limits:
-          memory: 50M
-    volumes: 
+          memory: 20M
+    volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
       - app
     ports:
       - "8080:4000"
+volumes:
+  cache:
+    driver: local
